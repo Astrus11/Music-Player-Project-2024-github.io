@@ -4,12 +4,15 @@ import ddf.minim.effects.*;
 import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
-
+//
 //Global Variables
 //
 void setup() 
 {
- //size(300, 200);
+ size(900, 800);
+ //
+ // Load Music
+ String musicPathway = "Music/";
 } //End setup
 //
 void draw() {
