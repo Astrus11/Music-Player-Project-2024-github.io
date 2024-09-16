@@ -13,6 +13,10 @@ void setup()
  //
  // Load Music
  String musicPathway = "Music/";
+ String mp3FileName = ".mp3";
+ String placeholder = "placeholder1tho";
+ String placeholder2 = "placeholderfr";
+ String placeholder3 = "placeholderagain";
 } //End setup
 //
 void draw() {
