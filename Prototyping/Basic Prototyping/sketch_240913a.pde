@@ -9,18 +9,19 @@ import ddf.minim.ugens.*;
 Minim minim;
 int numberOfSongs = 8; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
-int currentSong = numberOfSongs - numberOfSongs; //beginning current song is ZERO
+int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
-void setup() 
+void setup()
 {
- size(900, 800);
- //
- minim = new Minim(this); //load from data directory, loadFile should also load from project folderv
- // Load Music
- String musicPathway = "Music/";
- String mp3FileName = ".mp3";
- //Alphebetical order, should be the same as OS ordering files
- String beatYourCompetition = "Beat_Your_Competition";
+  size(900, 800);
+  //
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder
+  //
+  // Load Music
+  String musicPathway = "Music/";
+  String mp3FileName = ".mp3";
+  //Alphebetical order, same as OS ordering files
+  String beatYourCompetition = "Beat_Your_Competition";
   String cycles = "Cycles";
   String eureka = "Eureka";
   String ghostWalk = "Ghost_Walk";
@@ -31,31 +32,46 @@ void setup()
   //
   //Add Reading into Array
   String directory = "../../" + musicPathway;
-  println (currentSong, directory );
+  println ( currentSong, directory );
   String file = directory + groove + mp3FileName;
   println (file);
+  song[currentSong] = minim.loadFile( file );
+  file = directory + startYourEngines + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + beatYourCompetition + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + cycles + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + eureka + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + ghostWalk + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + newsroom + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
+  file = directory + theSimplest + mp3FileName;
+  println (file);
+  song[currentSong+=1] = minim.loadFile( file );
+  println( currentSong, song[currentSong] );
   //
-  song[currentSong] = minim.loadFile( "../../Music/groove.mp3" );
+  currentSong = 0;
   //
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Start_Your_Engines.mp3" );
-  //song[1].play();
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Beat_Your_Competition.mp3);
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Cycles.mp3 );
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Eureka.mp3 );
-  //song[currentSong+=1] = minim.loadFile( "../../Music/ghostWalk.mp3 );
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Newsroom.mp3 );
-  //song[currentSong+=1] = minim.loadFile( "../../Music/The_Simplest.mp3 );
-
-  
-  //Add currentSong as hardcoded link
+  song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
-  //Inspect with println
   //Purpose is 2D Shapes
   //Introduce keyPressed as keyboard shortcuts
   //Introduce mousePressed as interaction
-  //
-  //Future Problem Fixed
-  //beatYourCompetition.play();
   //
   //DIVs
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
