@@ -12,6 +12,7 @@ AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 //
 int appWidth, appHeight;
+float musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight;
 //
 void setup()
 {
@@ -19,8 +20,8 @@ void setup()
   appWidth = width;
   appHeight = height;
   //Variables for any music button
-  musicbuttonX = ;
-  musicButtonY = ;
+  musicButtonX = appWidth*1/4;
+  musicButtonY = appHeight*1/4;
   musicButtonWidth = appWidth*1/2;
   musicButtonHeight = appHeight*1/2;
   //
