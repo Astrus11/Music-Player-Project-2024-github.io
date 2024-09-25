@@ -10,9 +10,18 @@ Minim minim;
 int numberOfSongs = 3; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
+int currentSongIndex = 0;
 //
 int appWidth, appHeight;
 float musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight;
+float stopX, stopY, stopWidth, stopHeight;
+String musicPath = "MP3s/";
+String mp3FileName = ".mp3";
+String[] musicNames = {
+  "one",
+  "two",
+  "three"
+};
 //
 void setup()
 {
@@ -20,10 +29,27 @@ void setup()
   appWidth = width;
   appHeight = height;
   //Variables for any music button
-  musicButtonX = appWidth*1/4;
-  musicButtonY = appHeight*1/4;
   musicButtonWidth = appWidth*1/2;
-  musicButtonHeight = appHeight*1/2;
+  musicButtonHeight = appHeight*1/4;
+  musicButtonX = musicButtonWidth - musicButtonWidth*1/2;
+  musicButtonY = musicButtonHeight - musicButtonHeight*1/2;
+  if ( musicButtonWidth <= musicButtonHeight ) { //error: square does not go in the middle
+      // musicButtonWidth needs to change
+      musicButtonWidth = musicButtonHeight;
+  } else {
+      // musicButtonWidth needs to change
+      musicButtonWidth = musicButtonHeight;
+  }
+  //Use if statement to change, introduce ternary operator
+  //
+  //Population (Variables)
+  float padding = 1/4;
+  float stopButtonSize = 1-(1/4);
+  stopWidth = musicButtonWidth*stopButtonSize; // stopButtonSize
+  stopHeight = musicButtonHeight*stopButtonSize; // stopButtonSize
+  stopX = musicButtonX;
+  stopY = musicButtonY;
+  
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -58,10 +84,17 @@ void setup()
   //DIVs
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
-  //rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
+  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
 } //End setup
 //
 void draw() {
+  background(200); // Gray Scale 0-255
+  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
+  fill(0, 0, 255);
+  textSize(32);
+  text("Now Playing: " + musicNames[currentSongIndex], 50, height / 2);
+  text("Press SPACE to switch songs", 50, height / 2 + 40);
+  rect ( stopX, stopY, stopWidth, stopHeight );
 } //End draw
 //
 void mousePressed() {
