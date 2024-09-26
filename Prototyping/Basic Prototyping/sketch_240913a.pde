@@ -13,7 +13,7 @@ int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZE
 int currentSongIndex = 0;
 //
 int appWidth, appHeight;
-float musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight;
+float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float stopX, stopY, stopWidth, stopHeight;
 String musicPath = "MP3s/";
 String mp3FileName = ".mp3";
@@ -29,27 +29,33 @@ void setup()
   appWidth = width;
   appHeight = height;
   //Variables for any music button
-  musicButtonWidth = appWidth*1/2;
-  musicButtonHeight = appHeight*1/4;
-  musicButtonX = musicButtonWidth - musicButtonWidth*1/2;
-  musicButtonY = musicButtonHeight - musicButtonHeight*1/2;
-  if ( musicButtonWidth <= musicButtonHeight ) { //error: square does not go in the middle
+  musicButtonDIV_Width = appWidth*1/2;
+  musicButtonDIV_Height = appHeight*1/2;
+  musicButtonDIV_X = musicButtonDIV_Width - musicButtonDIV_Width*1/2;
+  musicButtonDIV_Y = musicButtonDIV_Height - musicButtonDIV_Height*1/2;
+     //if ( musicButtonWidth <= musicButtonHeight ) { //error: square does not go in the middle
       // musicButtonWidth needs to change
-      musicButtonWidth = musicButtonHeight;
-  } else {
+      //musicButtonWidth = musicButtonHeight;
+  // } else {
       // musicButtonWidth needs to change
-      musicButtonWidth = musicButtonHeight;
-  }
+      //musicButtonWidth = musicButtonHeight;
+  // }
   //Use if statement to change, introduce ternary operator
   //
   //Population (Variables)
-  float padding = 1/4;
-  float stopButtonSize = 1-(1/4);
-  stopWidth = musicButtonWidth*stopButtonSize; // stopButtonSize
-  stopHeight = musicButtonHeight*stopButtonSize; // stopButtonSize
-  stopX = musicButtonX;
-  stopY = musicButtonY;
-  
+  //musicButtonSquareWidth = ;
+  //musicButtonSquareHeight = ;
+  //musicButtonSquareX = ;
+  //musicButtonSquareY = ;
+  //float padding = 1.0/4.0;
+  //float stopButtonSize = 1.0-(1.0/4.0);
+  /*
+  stopWidth = musicButtonDIV_Width*stopButtonSize; // stopButtonSize
+  stopHeight = musicButtonDIV_Height*stopButtonSize; // stopButtonSize
+  stopX = musicButtonDIV_X;
+  stopY = musicButtonDIV_Y;
+  */
+  //
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -84,17 +90,17 @@ void setup()
   //DIVs
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
-  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
+  rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
 } //End setup
 //
 void draw() {
   background(200); // Gray Scale 0-255
-  rect( musicButtonX, musicButtonY, musicButtonWidth, musicButtonHeight );
-  fill(0, 0, 255);
-  textSize(32);
-  text("Now Playing: " + musicNames[currentSongIndex], 50, height / 2);
-  text("Press SPACE to switch songs", 50, height / 2 + 40);
-  rect ( stopX, stopY, stopWidth, stopHeight );
+  //rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight ); //Square
+  //fill(0, 0, 255);
+  //textSize(32);
+  //text("Now Playing: " + musicNames[currentSongIndex], 50, height / 2);
+  //text("Press SPACE to switch songs", 50, height / 2 + 40);
+  //rect ( stopX, stopY, stopWidth, stopHeight );
 } //End draw
 //
 void mousePressed() {
