@@ -32,7 +32,7 @@ void setup()
   musicButtonDIV_Width = appWidth*1/2;
   musicButtonDIV_Height = appHeight*1/2;
   musicButtonDIV_X = musicButtonDIV_Width - musicButtonDIV_Width*1/2;
-  musicButtonDIV_Y = musicButtonDIV_Height - musicButtonDIV_Height*1/2;
+  musicButtonDIV_Y = musicButtonDIV_Height- musicButtonDIV_Height*1/2;
      //if ( musicButtonWidth <= musicButtonHeight ) { //error: square does not go in the middle
       // musicButtonWidth needs to change
       //musicButtonWidth = musicButtonHeight;
@@ -43,12 +43,18 @@ void setup()
   //Use if statement to change, introduce ternary operator
   //
   //Population (Variables)
-  //musicButtonSquareWidth = ;
-  //musicButtonSquareHeight = ;
-  //musicButtonSquareX = ;
-  //musicButtonSquareY = ;
-  //float padding = 1.0/4.0;
-  //float stopButtonSize = 1.0-(1.0/4.0);
+  //Work out a case Study: Landscape
+  //musicButtonSquareWidth = musicButtonDIV_Height;
+  // musicButtonSquareHeight = musicButtonDIV_Height;
+  float padding1 = musicButtonDIV_Width - musicButtonDIV_Height; //working out value needed, with formulae
+  float padding2 = padding1*1/2; ////working out value needed, with formulae
+  //musicButtonSquareX = musicButtonDIV_X + padding2; //note: minus moves it the wrong way, difficult to see
+  //musicButtonSquareY = musicButtonDIV_Y;
+  println( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height ); 
+  //println ( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
+  println ( padding1 );
+  //
+  //Work out a case Study: Portrait
   /*
   stopWidth = musicButtonDIV_Width*stopButtonSize; // stopButtonSize
   stopHeight = musicButtonDIV_Height*stopButtonSize; // stopButtonSize
@@ -94,9 +100,9 @@ void setup()
 } //End setup
 //
 void draw() {
-  background(200); // Gray Scale 0-255
-  //rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight ); //Square
-  //fill(0, 0, 255);
+  //background(200); // Gray Scale 0-255
+  //rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
+  fill(0, 0, 255);
   //textSize(32);
   //text("Now Playing: " + musicNames[currentSongIndex], 50, height / 2);
   //text("Press SPACE to switch songs", 50, height / 2 + 40);
