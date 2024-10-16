@@ -56,6 +56,19 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton1X = musicButtonSquareX + musicButtonSquareHeight*1/4;
+  playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton2X = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton2Y = ;
+  playButton3X = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  playButton3Y = ;
+  playButton1X = ; 
+  playButton1Y = ;
+  playButton2X = ;
+  playButton2Y = ;
+  playButton3X = ;
+  playButton3Y = ;
+  //playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -115,8 +128,8 @@ void draw() {
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(255); //noFill();
+  triangle (playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
+  fill(255); //noFill(); //White in Gray Scale
   stroke(1); //Reset default
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
