@@ -16,10 +16,15 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
-float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 //
-color blue=#0072ff, red=#ba0000;
+color blue=#0072ff, red=#ba0000, purple=#CF00FF, white=#FFFFFF, black=#000000, green=#00FF00;
+color dayForeground=purple, dayHoverover=blue, dayBackground=white;
+color darkForeground=purple, darkHoverover=red, darkBackground=black;
+color nightForeground=green, nightHoverover=red, nightBackground=black;
+color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverOver;
+//
+Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
 void setup()
 {
@@ -57,13 +62,6 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
-  playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
-  playButton2Y = musicButtonSquareY + musicButtonSquareHeight*1/2;
-  playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4;
-  playButton3Y = musicButtonSquareY + musicButtonSquareHeight*2/4;
-  //playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -96,6 +94,27 @@ void setup()
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
+   println(colorDarkMode);
+  if ( colorDarkMode==false && ( hour()<=7 || hour()>=17 ) ) { //Testing: change 5PM to earlier time, shortcut colorNightMode==true
+    //Night
+    appColorForeground = nightForeground;
+    appColorHoverover = nightHoverover;
+    appColorBackground = nightBackground;
+    println("wesaiyanshavenolimits1");
+  } else if ( colorDarkMode==false && ( hour()>7 || hour()<17 ) ) {
+    //Day
+    appColorForeground = dayForeground;
+    appColorHoverover = dayHoverover;
+    appColorBackground = dayBackground;
+    println("wesaiyanshavenolimits2");
+  } else {
+    //Dark Mode 
+    appColorForeground = darkForeground;
+    appColorHoverover = darkHoverover;
+    appColorBackground = darkBackground;
+    println("wesaiyanshavenolimits3");
+    }
+    //
 } //End setup
 //
 void draw() {
@@ -104,8 +123,8 @@ void draw() {
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //
   /* Note: 3 types of colour, in pairs for hoverover
-   - Day, Foreground: #0072ff | Hoverover: #8400FA (Hoverover) / Background: #FFFFFF
-   - Dark, Foreground: #ba0000  | Hoverover: #FF960D (Hoverover) | Background: #000000
+   - Day, Foreground: #0072ff | Hoverover: #8400FA / Background: #FFFFFF
+   - Dark, Foreground: #ba0000  | Hoverover: #FF960D | Background: #000000
    - Night, no blue: Foreground: #5DFC0F | Hoverover: #0FFC88 | Background: #000000
    - Dark Mode is for all the time, how bright the screen is and eye strain
    - API: when does sunrise, when does sunset, is the system time within those hours
@@ -123,8 +142,8 @@ void draw() {
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  triangle (playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
-  fill(255); //noFill(); //White in Gray Scale
+  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  fill(255); //noFill();
   stroke(1); //Reset default
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
