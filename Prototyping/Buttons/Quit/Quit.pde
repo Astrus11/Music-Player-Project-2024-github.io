@@ -62,6 +62,17 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  quitThicknessLine = musicButtonSquareWidth/musicButtonSquareWidth;
+  /*
+  quitButtonX1 = ;
+  quitButtonY1 = ;
+  quitButtonX2 = ;
+  quitButtonY2 = ;
+  quitButtonX3 = ;
+  quitButtonY3 = ;
+  quitButtonX4 = ;
+  quitButtonY4 = ;
+  */
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -142,7 +153,10 @@ void draw() {
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, cyberpunkEdge1, cyberpunkEdge2, cyberpunkEdge3, cyberpunkEdge4, )
+  float strokeWeight(quitThicknessLine);
+  line( quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2 );
+  line( quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4 );
   fill(255); //noFill();
   stroke(1); //Reset default
   //
