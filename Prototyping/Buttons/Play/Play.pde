@@ -17,9 +17,18 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
+float quitLine;
 //
-color blue=#0072ff, red=#ba0000;
+color blue=#1669F5, red=#F51616, purple=#B116F5, lightgray=#8CC4F0, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
+color dayForeground=blue, dayHoverover=red, dayBackground=purple;
+color darkForeground=blue, darkHoverover=dark, darkBackground=lightgray;
+color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
+color appColorForeground, appColorHoverover, appColorBackground;
+color stopButtonHoverover;
+color quitLineColor;
+//
+Boolean colorDarkMode=true;
 //
 void setup()
 {
@@ -30,11 +39,11 @@ void setup()
   musicButtonDIV_Width = appWidth*1/2;
   musicButtonDIV_Height = appHeight*1/2;
   musicButtonDIV_X = musicButtonDIV_Width - musicButtonDIV_Width*1/2;
-  musicButtonDIV_Y = musicButtonDIV_Height- musicButtonDIV_Height*1/2;
+  musicButtonDIV_Y = musicButtonDIV_Height - musicButtonDIV_Height*1/2;
   //Use if statement to change, introduce ternary operator
   //
   //Population (Variables)
-  //Work out a case Study: shorter  side of DIV
+  //Work out a case Study: shorter side of DIV
   if ( musicButtonDIV_Width >= musicButtonDIV_Height ) { // Landscape //error: square does not go in the middle
     // musicButtonWidth needs to change
     musicButtonSquareWidth = musicButtonDIV_Height ;
@@ -57,13 +66,13 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
   playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
   playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
   playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
   playButton2Y = musicButtonSquareY + musicButtonSquareHeight*1/2;
   playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4;
-  playButton3Y = musicButtonSquareY + musicButtonSquareHeight*2/4;
-  //playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y
+  playButton3Y = musicButtonSquareY + musicButtonSquareHeight*3/4;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -71,22 +80,22 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String groove = "groove";
-  String beatYourCompetition = "Beat_Your_Competition";
-  String theSimplest = "The_Simplest";
+  String meatballParade = "weSaiyansHaveLimits";
+  String sneakySnitch = "TheDrink";
+  String monkeys = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + groove + mp3FileName;
+  String file = directory + meatballParade + mp3FileName;
   song[currentSong] = minim.loadFile( file );
-  file = directory + theSimplest + mp3FileName;
+  file = directory + sneakySnitch + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + beatYourCompetition + mp3FileName;
-  song[currentSong+=1] = minim.loadFile( file );
+  file = directory + monkeys + mp3FileName;
+  song[currentSong+=1] = minim.loadFile(file);
   //
   currentSong = 0;
   //
-  song[currentSong].play();
+  //song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
   //Purpose is 2D Shapes
   //Introduce keyPressed as keyboard shortcuts
@@ -96,57 +105,91 @@ void setup()
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
-} //End setup
+  println(colorDarkMode);
+  if (colorDarkMode==false && hour()<=7 && hour()>=17) 
+  {
+    //Night Mode
+    appColorForeground=nightForeground;
+    appColorHoverover=nightHoverover;
+    appColorBackground=nightBackground;
+    println("sigma");
+  } 
+    else if (colorDarkMode==false && hour()<7 || hour()>17) 
+    {
+      //Dark Mode
+      appColorForeground=darkForeground;
+      appColorHoverover=darkHoverover;
+      appColorBackground=darkBackground;
+      println("DashTech1");
+    } 
+    else 
+    {
+      //Day Mode
+      appColorForeground=dayForeground;
+      appColorHoverover=dayHoverover; 
+      appColorBackground=dayBackground;
+      println("DashTech3");
+    } 
+ } //End setup
 //
 void draw() {
-  background(0); //Gray Scale: 0-255, full BLUE Colour
+  background(appColorBackground); // Gray Scale: 0-255
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
+  //stroke(); //Colour
   //
   /* Note: 3 types of colour, in pairs for hoverover
-   - Day, Foreground: #0072ff | Hoverover: #8400FA (Hoverover) / Background: #FFFFFF
-   - Dark, Foreground: #ba0000  | Hoverover: #FF960D (Hoverover) | Background: #000000
-   - Night, no blue: Foreground: #5DFC0F | Hoverover: #0FFC88 | Background: #000000
+   - Day: Foreground: #DED7D0 | Hoverover: #D38531 | Background: #FFBC74
+   - Dark: Foreground: #DED7D0 | Hoverover: #BC6A11 | Background: #554C43
+   - Night, no blue: Foreground: #312E2B | Hoverover: #2E2E2E | Background: #0D0D0D
    - Dark Mode is for all the time, how bright the screen is and eye strain
    - API: when does sunrise, when does sunset, is the system time within those hours
    - Night mode is for all the time or just
    - Note: preferences are hardcoded here but can be choices in CS20
    */
   //if ( day ) {} else if ( dark ) {} else {}
-  //
-  //Hoverover IF - Used in all other buttons too
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = red;
+    stopButtonHoverOver= appColorHoverover;
+    quitLineColor = appColorHoverover;
   } else {
-    stopButtonHoverOver = blue;
+    stopButtonHoverOver = appColorForeground;
+    quitLineColor = appColorForeground;
   }
-  fill(stopButtonHoverOver);
+  //
+  //
+  fill(stopButtonHoverover);
   noStroke(); //Colour
   //
-  triangle (playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
-  fill(255); //noFill(); //White in Gray Scale
-  stroke(1); //Reset default
+  //triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
   //
+  fill(1);
+  stroke(1);
+  textSize(100);
+  text("YBA prime update", 140, 120);
+  //
+  stroke(quitLineColor);
+  strokeWeight(quitLine);
+  noFill();
+  noStroke();
+  fill(quitLineColor);
+  triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
+  fill(225);
+  stroke(1);
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
+  //song[currentSong].isPlaying();
   //
 } //End draw
 //
 void mousePressed() {
   //Boolean for Click
   //if() {} else {}
-  //
-  /* STOP Button Mouse Press, after Hoverover
+   /* STOP Button Mouse Press, after Hoverover
    Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
    */
- if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-   if ( song[currentSong].isPlaying() ) {
-   song[currentSong].pause(); //single tap
-   } else {
-   song[currentSong].rewind(); //double tap
+  if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
+    song[currentSong].loop(0);
    }
-   }
-  //
 } //End mousePressed
 //
 void keyPressed() {
@@ -154,22 +197,62 @@ void keyPressed() {
    Note: CAP Lock with ||
    if ( key==? || key==? ) ;
    */
-  if ( key=='P' || key=='p' ) song[currentSong].play(); //Simple Play, no double tap possible
+  //if ( key=='P' || key=='p' ) song[currentSong].play(); //Simple Play, no double tap possible
   //
-  //if ( key=='P' || key=='p' ) song[currentSong].loop(0); //Simple Play, double tap possible
+  if ( key=='P' || key=='p' ) song[currentSong].loop(0); //Simple Play, double tap possible
   /* Note: double tap is automatic rewind, no pause
    Simble is two triangles
    This changes what the button might become after it is pressed
    */
-  if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
+  //if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
   //
-  /* if ( key=='S' | key=='s' ) {
+  if ( key=='S' | key=='s' ) { 
    if ( song[currentSong].isPlaying() ) {
    song[currentSong].pause(); //single tap
    } else {
    song[currentSong].rewind(); //double tap
    }
    }
+   if ( key=='L' | key=='l' ); song[currentSong].loop(1); // one loop
+   if ( key=='K' | key=='k' ); song[currentSong].loop(); // loop forever
+   if ( key=='F' | key=='f' ); song[currentSong].skip(10000); // fast forward
+   if ( key=='R' | key=='r' ); song[currentSong].skip(-10000); // rewind
+   if ( key=='M' | key=='m' ); {//mute
+     //
+     if ( song[currentSong].isMuted() ) {
+       //ERROR: song might not be playing
+       //CATCH: ask .isPlaying() or !.isPlaying()song[currentSong].unmute();
+       song[currentSong].unmute();
+     } else {
+       //Possible ERROR: Might rewind the song
+       song[currentSong].mute();
+     }
+   }
+     if ( key=='O' || key=='o' ) { // Pause
+      //
+      if ( song[currentSong].isPlaying() ) {
+       song[currentSong].pause();
+      } else {
+       song[currentSong].play();
+      }
+    }
+   if (key == CODED || keyCode ==ESC) exit(); //good ol' quit button
+   if (key == 'Q' || key == 'q') exit();
+   /*if ( key=='>' | key=='>' ); {//next song
+     song[currentSong].stop;
+     song[currentSong+=1] = minim.loadFile(file);
+     song[currentSong].play;
+   }
+   if ( key=='<' | key=='<' ); //previous song
+   */
+   /*
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
    */
 } //End keyPressed
 //
