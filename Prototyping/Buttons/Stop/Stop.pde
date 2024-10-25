@@ -17,10 +17,10 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color blue=#0072ff, red=#ba0000, purple=#CF00FF, white=#FFFFFF, black=#000000, green=#00FF00;
-color dayForeground=purple, dayHoverover=blue, dayBackground=white;
-color darkForeground=purple, darkHoverover=red, darkBackground=black;
-color nightForeground=green, nightHoverover=red, nightBackground=black;
+color red=#D62B2B, redder=#ba0000, purple=#CF00FF, white=#FFFFFF, black=#000000, cyan=#17FAB7;
+color dayForeground=purple, dayHoverover=red, dayBackground=white;
+color darkForeground=purple, darkHoverover=redder, darkBackground=black;
+color nightForeground=cyan, nightHoverover=redder, nightBackground=black;
 color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverOver;
 //
@@ -69,17 +69,17 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String groove = "groove";
-  String beatYourCompetition = "Beat_Your_Competition";
+  String TheDrink = "TheDrink";
+  String weSaiyansHaveLimits = "weSaiyansHaveLimits";
   String theSimplest = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + groove + mp3FileName;
+  String file = directory + TheDrink + mp3FileName;
   song[currentSong] = minim.loadFile( file );
   file = directory + theSimplest + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + beatYourCompetition + mp3FileName;
+  file = directory + weSaiyansHaveLimits + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   //
   currentSong = 0;
@@ -135,9 +135,9 @@ void draw() {
   //
   //Hoverover IF - Used in all other buttons too
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = red;
+    stopButtonHoverOver = redder;
   } else {
-    stopButtonHoverOver = blue;
+    stopButtonHoverOver = red;
   }
   fill(stopButtonHoverOver);
   noStroke(); //Colour
@@ -145,6 +145,8 @@ void draw() {
   rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
   fill(255); //noFill();
   stroke(1); //Reset default
+  textSize(100);
+  text("ITS FUTILE ass button", 45, 120);
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
