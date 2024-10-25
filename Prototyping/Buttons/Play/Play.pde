@@ -19,11 +19,11 @@ float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 float quitLine;
 //
-color blue=#1669F5, red=#F51616, purple=#B116F5, lightgray=#8CC4F0, dark=#554C43, black=#000000, sortablack=#2E2E2E;
+color blue=#1669F5, darkblue=#0929D8, purple=#B116F5, lightgray=#8CC4F0, dark=#554C43, black=#000000, fweh=#141234;
 color stopButtonHoverOver;
-color dayForeground=blue, dayHoverover=red, dayBackground=purple;
+color dayForeground=blue, dayHoverover=darkblue, dayBackground=purple;
 color darkForeground=blue, darkHoverover=dark, darkBackground=lightgray;
-color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
+color nightForeground=dark, nightHoverover=black, nightBackground=fweh;
 color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverover;
 color quitLineColor;
@@ -80,17 +80,17 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String meatballParade = "weSaiyansHaveLimits";
-  String sneakySnitch = "TheDrink";
-  String monkeys = "The_Simplest";
+  String TheDrink = "TheDrink";
+  String weSaiyansHaveLimits = "weSaiyansHaveLimits";
+  String The_Simplest = "The_Simplest";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + meatballParade + mp3FileName;
+  String file = directory + TheDrink + mp3FileName;
   song[currentSong] = minim.loadFile( file );
-  file = directory + sneakySnitch + mp3FileName;
+  file = directory + weSaiyansHaveLimits + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + monkeys + mp3FileName;
+  file = directory + The_Simplest + mp3FileName;
   song[currentSong+=1] = minim.loadFile(file);
   //
   currentSong = 0;
@@ -169,8 +169,11 @@ void draw() {
   //
   stroke(quitLineColor);
   strokeWeight(quitLine);
+  //strokeCap(ROUND);
   noFill();
   noStroke();
+  stroke(1);
+  strokeWeight(5);
   fill(quitLineColor);
   triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
   fill(225);
