@@ -65,7 +65,7 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/3;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
+  quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4.5*1/2;
   quitButtonX1 = stopX;
   quitButtonY1 = stopY;
   quitButtonX2 = stopX+stopWidth*1/1.5;
@@ -83,13 +83,13 @@ void setup()
   //Alphebetical order, same as OS ordering files
   String TheDrink = "TheDrink";
   String weSaiyansHaveLimits = "weSaiyansHaveLimits";
-  String theSimplest = "The_Simplest";
+  String Itsperfect = "Itsperfect";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
   String file = directory + TheDrink + mp3FileName;
   song[currentSong] = minim.loadFile( file );
-  file = directory + theSimplest + mp3FileName;
+  file = directory + Itsperfect + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + weSaiyansHaveLimits + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );

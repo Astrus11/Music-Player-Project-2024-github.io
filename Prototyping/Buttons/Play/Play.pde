@@ -80,18 +80,18 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String TheDrink = "TheDrink";
+   String TheDrink = "TheDrink";
   String weSaiyansHaveLimits = "weSaiyansHaveLimits";
-  String The_Simplest = "The_Simplest";
+  String Itsperfect = "Itsperfect";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
   String file = directory + TheDrink + mp3FileName;
   song[currentSong] = minim.loadFile( file );
+  file = directory + Itsperfect + mp3FileName;
+  song[currentSong+=1] = minim.loadFile( file );
   file = directory + weSaiyansHaveLimits + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
-  file = directory + The_Simplest + mp3FileName;
-  song[currentSong+=1] = minim.loadFile(file);
   //
   currentSong = 0;
   //
