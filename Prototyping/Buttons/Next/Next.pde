@@ -90,13 +90,13 @@ void setup()
   //Alphebetical order, same as OS ordering files
   String TheDrink = "TheDrink";
   String weSaiyansHaveLimits = "weSaiyansHaveLimits";
-  String Itsperfect = "Itsperfect";
+  String TheDrinkler = "TheDrinkler";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
   String file = directory + TheDrink + mp3FileName;
   song[currentSong] = minim.loadFile( file );
-  file = directory + Itsperfect + mp3FileName;
+  file = directory + TheDrinkler + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
   file = directory + weSaiyansHaveLimits + mp3FileName;
   song[currentSong+=1] = minim.loadFile( file );
@@ -228,8 +228,8 @@ void keyPressed() {
   }
   if ( key=='L' | key=='l' ) song[currentSong].loop(1); // one loop
   if ( key=='K' | key=='k' ) song[currentSong].loop(); // loop forever
-  if ( key=='F' | key=='f' ) song[currentSong].skip(10000); // fast forward
-  if ( key=='R' | key=='r' ) song[currentSong].skip(-10000); // rewind
+  if ( key=='F' | key=='f' ) song[currentSong].skip(2000); // fast forward
+  if ( key=='R' | key=='r' ) song[currentSong].skip(-2000); // rewind
   if ( key=='M' | key=='m' );
   {//mute
     //
