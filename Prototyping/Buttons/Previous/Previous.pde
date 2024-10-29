@@ -29,6 +29,7 @@ Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button f
 void setup()
 {
   size(1000, 800);
+  img = loadImage("frauds.jpg");
   appWidth = width;
   appHeight = height;
   //Variables for any music button
@@ -117,8 +118,9 @@ void setup()
     //
 } //End setup
 //
+PImage img;
 void draw() {
-  background(0); //Gray Scale: 0-255, full BLUE Colour
+  background(img);
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //
@@ -143,10 +145,10 @@ void draw() {
   noStroke(); //Colour
   //
   rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(255); //noFill();
+  fill(1); //noFill();
   stroke(1); //Reset default
-  textSize(100);
-  text("ITS FUTILE ass button", 45, 120);
+  textSize(50);
+  text("LETS CHARGE TOGETHER AT FULL POWER!", 60, 120);
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
