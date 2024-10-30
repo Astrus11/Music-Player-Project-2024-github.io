@@ -17,12 +17,19 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color blue=#0072ff, red=#ba0000;
+color red=#D62B2B, redder=#ba0000, purple=#CF00FF, white=#FFFFFF, black=#000000, cyan=#17FAB7;
+color dayForeground=purple, dayHoverover=red, dayBackground=white;
+color darkForeground=purple, darkHoverover=redder, darkBackground=black;
+color nightForeground=cyan, nightHoverover=redder, nightBackground=black;
+color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverOver;
+//
+Boolean colorDarkMode=true; //Preference: true or false //Future: Build Button for Dark Mode Preference
 //
 void setup()
 {
   size(1000, 800);
+  img = loadImage("shhhh.jpg");
   appWidth = width;
   appHeight = height;
   //Variables for any music button
@@ -88,16 +95,40 @@ void setup()
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
+   println(colorDarkMode);
+  if ( colorDarkMode==false && ( hour()<=7 || hour()>=17 ) ) { //Testing: change 5PM to earlier time, shortcut colorNightMode==true
+    //Night
+    appColorForeground = nightForeground;
+    appColorHoverover = nightHoverover;
+    appColorBackground = nightBackground;
+    println("shutup1");
+  } else if ( colorDarkMode==false && ( hour()>7 || hour()<17 ) ) {
+    //Day
+    appColorForeground = dayForeground;
+    appColorHoverover = dayHoverover;
+    appColorBackground = dayBackground;
+    println("shutup2");
+  } else {
+    //Dark Mode 
+    appColorForeground = darkForeground;
+    appColorHoverover = darkHoverover;
+    appColorBackground = darkBackground;
+    println("shutup3");
+    }
+    //
 } //End setup
 //
+PImage img;
 void draw() {
-  background(0); //Gray Scale: 0-255, full BLUE Colour
+  imageMode(CENTER);
+  image(img, 200, 200, 320, 320);
+  background(105);
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //
   /* Note: 3 types of colour, in pairs for hoverover
-   - Day, Foreground: #0072ff | Hoverover: #8400FA (Hoverover) / Background: #FFFFFF
-   - Dark, Foreground: #ba0000  | Hoverover: #FF960D (Hoverover) | Background: #000000
+   - Day, Foreground: #0072ff | Hoverover: #8400FA / Background: #FFFFFF
+   - Dark, Foreground: #ba0000  | Hoverover: #FF960D | Background: #000000
    - Night, no blue: Foreground: #5DFC0F | Hoverover: #0FFC88 | Background: #000000
    - Dark Mode is for all the time, how bright the screen is and eye strain
    - API: when does sunrise, when does sunset, is the system time within those hours
@@ -108,16 +139,18 @@ void draw() {
   //
   //Hoverover IF - Used in all other buttons too
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = red;
+    stopButtonHoverOver = redder;
   } else {
-    stopButtonHoverOver = blue;
+    stopButtonHoverOver = red;
   }
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(255); //noFill();
+  rect( stopX, stopY, stopWidth, stopHeight );
+  fill(1); //noFill();
   stroke(1); //Reset default
+  textSize(100);
+  text("shh bbg", 328, 120);
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
