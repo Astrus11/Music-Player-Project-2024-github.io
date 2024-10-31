@@ -30,6 +30,7 @@ void setup()
 {
   size(1000, 800);
   img = loadImage("shhhh.jpg");
+  goku = loadImage("gokushhh.jpg");
   appWidth = width;
   appHeight = height;
   //Variables for any music button
@@ -119,6 +120,7 @@ void setup()
 } //End setup
 //
 PImage img;
+PImage goku;
 void draw() {
   imageMode(CENTER);
   image(img, 200, 200, 320, 320);
@@ -139,14 +141,16 @@ void draw() {
   //
   //Hoverover IF - Used in all other buttons too
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = redder;
+    imageMode(CENTER);
+    image(img, 500, 400, 320, 320);
   } else {
-    stopButtonHoverOver = red;
+    imageMode(CENTER);
+    image(goku, 500, 400, 320, 320);
   }
   fill(stopButtonHoverOver);
   noStroke(); //Colour
   //
-  rect( stopX, stopY, stopWidth, stopHeight );
+  //rect( stopX, stopY, stopWidth, stopHeight );
   fill(1); //noFill();
   stroke(1); //Reset default
   textSize(100);
