@@ -121,10 +121,12 @@ void setup()
 //
 PImage img;
 PImage goku;
+PImage future;
 void draw() {
   imageMode(CENTER);
   image(img, 200, 200, 320, 320);
-  background(105);
+  future = loadImage("future.jpg");
+  background(future);
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //
@@ -154,7 +156,7 @@ void draw() {
   fill(1); //noFill();
   stroke(1); //Reset default
   textSize(100);
-  text("shh bbg", 328, 120);
+  text("shh bbg", 328, 160);
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
