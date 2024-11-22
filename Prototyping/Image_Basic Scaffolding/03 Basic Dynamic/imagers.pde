@@ -55,9 +55,8 @@ void mousePressed() {
 }
 //
 void keyPressed() {
-  if (key==DOWN || key == UP); 
+  if (key==DOWN); 
     picBum = loadImage("../../../../Images/Portrait/method.jpg");
-  
 }
 //
 //End MAIN
