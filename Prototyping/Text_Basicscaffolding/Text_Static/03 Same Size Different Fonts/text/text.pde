@@ -12,7 +12,7 @@ float footerX, footerY, footerWidth, footerHeight;
 PFont actualtextFont, footerFont, phraseFont;
 color blue=#0063FF, white=#FFFFFF, resetDefaultInk=white; //Not Night Mode Friendly
 int size;
-String actualtext = "Collect my pages", footer="Edgerunners", phrase="While playing dokkan";
+String actualtext = "Collect my pages", footer="CYBERPUNK", phrase="While playing dokkan";
 //
 //Display
 size( 500, 700 ); //Portrait CANVAS
