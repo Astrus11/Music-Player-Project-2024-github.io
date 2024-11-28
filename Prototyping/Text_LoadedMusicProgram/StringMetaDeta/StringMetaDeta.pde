@@ -14,19 +14,40 @@ float stwX2, stwY2, stwWidth2, stwHeight2;
 float stwX3, stwY3, stwWidth3, stwHeight3;
 //
 Minim minim;
-int numberOfSongs =8;
+int numberOfSongs =3;
 AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
-Audiostw[] playListTitlestw; = new AudioPlayer[numberOfSongs]; //"song sigma one"
-Audiostw[] playListPositionstw; = new AudioPlayer[numberOfSongs]; //"song sigma one"
-Audiostw[] playListTimeRemainingstw; = new AudioPlayer[numberOfSongs]; //"song sigma one"
-Audiostw[] playListTotalTimestw; = new AudioPlayer[numberOfSongs]; //"song sigma one"
-int currnetSong = numberOfSongs - numberOfSongs;
+AudioMetaData[] playListTitleMetaData = new AudioMetaData[numberOfSongs]; 
+AudioMetaData[] playListPositionMetaData = new AudioMetaData[numberOfSongs]; 
+AudioMetaData[] playListTimeRemainingMetaData = new AudioMetaData[numberOfSongs]; //"song sigma one"
+AudioMetaData[] playListTotalTimeMetaData = new AudioMetaData[numberOfSongs]; //"song sigma one"
+int currentSong = numberOfSongs - numberOfSongs;
 void setup()
 {
   fullScreen();
   appWidth = displayWidth;
   appHeight = displayHeight;
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
+  // Load Music
+  String musicPathway = "Music/";
+  String mp3FileName = ".mp3";
+  //Alphebetical order, same as OS ordering files
+  String TheDrink = "TheDrink";
+  String weSaiyansHaveLimits = "weSaiyansHaveLimits";
+  String TheDrinkler = "TheDrinkler";
+  //
+  //Add Reading into Array
+  String directory = "../../../" + musicPathway;
+  String file = directory + TheDrink + mp3FileName;
+  playList[currentSong] = minim.loadFile( file );
+  file = directory + TheDrinkler + mp3FileName;
+  playList[currentSong+=1] = minim.loadFile( file );
+  file = directory + weSaiyansHaveLimits + mp3FileName;
+  playList[currentSong+=1] = minim.loadFile( file );
+  //
+  currentSong = 0;
+  //
+  playList[currentSong].play();
   //Population
   stwX1 = appWidth*1/10; //Title
   stwY1 = appHeight*4/10;
