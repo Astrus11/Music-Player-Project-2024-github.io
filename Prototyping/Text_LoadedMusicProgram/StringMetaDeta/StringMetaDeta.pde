@@ -1,5 +1,3 @@
-/* META Data - Strings
- */
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -8,60 +6,86 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 //
 //Global Variables
-int appWidth,  appHeight;
-float stwX1, stwY1, stwWidth1, stwHeight1;
-float stwX2, stwY2, stwWidth2, stwHeight2;
-float stwX3, stwY3, stwWidth3, stwHeight3;
-PFont titleFont, footerFont, phraseFont;
-//
 Minim minim;
-int numberOfSongs =3; //Able to Autodetect based on Pathway
+int numberOfSongs = 3;
 AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZERO
 AudioMetaData[] playListMetaData = new AudioMetaData[numberOfSongs];
-AudioMetaData[] playListPositionMetaData = new AudioMetaData[numberOfSongs]; 
-AudioMetaData[] playListTimeRemainingMetaData = new AudioMetaData[numberOfSongs]; //"song sigma one"
-AudioMetaData[] playListTotalTimeMetaData = new AudioMetaData[numberOfSongs]; //"song sigma one"
-int currentSong = numberOfSongs - numberOfSongs;
+//
+int appWidth, appHeight;
+float stwX1, stwY1, stwWidth1, stwHeight1;
+float stwX2, stwY2, stwWidth2, stwHeight2;
+float stwX3, stwY3, stwWidth3, stwHeight3;
+PFont slenderFont, cyberpunkFont, saiyanFont;
+color ink, bizzyblue=#0041FF, white=#FFFFFF, resetDefaultInk=white;
+int size;
+String title = "pillar1", footer= "pillar2", phrase= "pillar3";
+Boolean randomColour = false;
+//
+/*
+AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
+ AudioMetaData[] playListTitleMetaData = new AudioMetaData[numberOfSongs];
+ AudioMetaData[] playListPositionMetaData = new AudioMetaData[numberOfSongs];
+ AudioMetaData[] playListTimeRemainingMetaData = new AudioMetaData[numberOfSongs]; //might change
+ AudioMetaData[] playListTotalTimeMetaData = new AudioMetaData[numberOfSongs]; //might change
+ int currentSong = numberOfSongs - numberOfSongs;
+ */
 void setup()
 {
   fullScreen();
   appWidth = displayWidth;
   appHeight = displayHeight;
-  minim = new Minim(this);
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
   // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
-  String TheDrink = "TheDrink";
-  String weSaiyansHaveLimits = "weSaiyansHaveLimits";
+  //Alphebetical order, same as OS ordering files
+  String IReallyWannaStayAtYourHouse = "IReallyWannaStayAtYourHouse";
   String TheDrinkler = "TheDrinkler";
+  String saiyansHaveLimits = "saiyansHaveLimits";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
-  String file = directory + TheDrink + mp3FileName;
+  String file = "";
+  /*
+  String file = directory + meatballParade + mp3FileName;
   playList[currentSong] = minim.loadFile( file );
-  file = directory + TheDrinkler + mp3FileName;
+  file = directory + sneakySnitch + mp3FileName;
   playList[currentSong+=1] = minim.loadFile( file );
-  file = directory + weSaiyansHaveLimits + mp3FileName;
-  playList[currentSong+=1] = minim.loadFile( file );
+  file = directory + monkeys + mp3FileName;
+  playList[currentSong+=1] = minim.loadFile(file);
+  */
   //
+  for (int i=0; i<numberOfSongs; i++) {
+    if (i==0) file = directory + IReallyWannaStayAtYourHouse + mp3FileName;
+    if (i==1) file = directory + TheDrinkler + mp3FileName;
+    if (i==2) file = directory + saiyansHaveLimits + mp3FileName;
+    playList[i] = minim.loadFile( file );
+  }
   currentSong = 0;
   //
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
+  //
+  // NOTE: Lines of code repeating
+  /*
+  playListMetaData[currentSong] = playList[currentSong].getMetaData(); //reads song meta 1, like song 1, mimicing array notation
   currentSong++;
   playListMetaData[currentSong] = playList[currentSong].getMetaData();
   currentSong++;
   playListMetaData[currentSong] = playList[currentSong].getMetaData();
-    /* NOTE: Introduce FOR LOOP
+  currentSong++;
+  */
+  /* NOTE: Introduce FOR LOOP
    - Known: how many lines of code
    - WHILE is for unknown loop interations
-   
+   */
    for (int i=0; i<numberOfSongs; i++) {
    playListMetaData[i] = playList[i].getMetaData();
    }
-   */
-   /* For Prototyping Meta Data, print all information to the console first
+  //
+  currentSong = 0;
+  //
+  /* For Prototyping Meta Data, print all information to the console first
    //Verifying Meta Data, 18 println's
    //See .mp3 Right-Click / Properties / Details
    println("\n"); //Two spaces: one for ln, one for /n escape
@@ -93,34 +117,100 @@ void setup()
   //String[] fontList = PFont.list(); //To list all fonts available on OS
   //printArray(fontList); //For listing all possible fonts to choose from, then createFont
   // Tools / Create Font / Find Font / Do not press "OK", known bug
+  cyberpunkFont = createFont("Slender", 55); //Verify the font exists in Processing.Java
+  slenderFont = createFont("Cyberpunk", 55);
+  saiyanFont = createFont("HelveticaNeue BlackCond", 55);
+  //
+  //
   //Population
-  stwX1 = appWidth*1/10; //Title
-  stwY1 = appHeight*4/10;
-  stwWidth1 = appWidth*8/10;
-  stwHeight1 = appHeight*1/10;
-  stwX2 = appWidth*1/10; //Song Position
+  stwX2 = stwX1 = appWidth*6/10;
+  stwY1 = appHeight*2/10;
+  stwWidth1 = appWidth*4/10;
+  stwHeight3 = stwHeight2 = stwHeight1 = appHeight*1/10;
   stwY2 = appHeight*3/10;
-  stwWidth2 = appWidth*3/10;
-  stwHeight2 = appHeight*1/10;
-  stwX3 = appWidth*4/10; //Time Remaining
-  stwY3 = appHeight*3/10;
-  stwWidth3 = appWidth*5/10;
-  stwHeight3 = appHeight*1/10;
-  
-  //DIV //stwX, stwY, stwWidth, stwHeight
+  stwWidth2 = appWidth*4/10;
+  stwX3 = appWidth*6/10;
+  stwY3 = appHeight*4/10;
+  stwWidth3 = appWidth*4/10;
+  //
+  //DIV: turn off onces repeated in VOID draw, saves systems resources
+  //X, Y, Width, Height
+  /*
+  rect( stwX1, stwY1, stwWidth1, stwHeight1 ); //Title
+  rect( stwX2, stwY2, stwWidth2, stwHeight2 ); //Position
+  rect( stwX3, stwY3, stwWidth3, stwHeight3 ); //Time Remaining | Total Song Length
+  */
+}
+//
+void draw() {
+  //
+  /*Optical Illusion creating movement
+   - screen goes at front of draw(), repeating setup()
+   */
+  fill(resetDefaultInk);
   rect( stwX1, stwY1, stwWidth1, stwHeight1 );
   rect( stwX2, stwY2, stwWidth2, stwHeight2 );
   rect( stwX3, stwY3, stwWidth3, stwHeight3 );
-} //End setup
-//
-void draw() {
-} //End draw
+  //
+  //Drawing Text: applies to all text
+  textAlign(CENTER, CENTER); //Align X&Y, see Processing.org / Reference
+  //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
+  ink = bizzyblue;
+  fill(ink);
+  size = 30; //Change the number until it fits
+  textFont( slenderFont, size );
+  /*Problem: .mp3 does not have the Meta Data Entered
+   - must inspect .mp3 properties / details for information
+   - what if Drag&Drop thus no inspection
+   - metadata=="", then should put something in for the user
+   */
+  String titleCheck = ( playListMetaData[currentSong].title()!="" ) ? "Title Exists": "Title Does not Exist" ; //Careful with "not ="
+  text( playListMetaData[currentSong].title(), stwX1, stwY1, stwWidth1, stwHeight1 );
+  fill(ink);
+  size = 43; //Change the number until it fits
+  textFont( cyberpunkFont, size );
+  //int timeRemaining = playListMetaData[currentSong].length()/1000; // Needs Updating
+  int timeRemaining = playListMetaData[currentSong].length()/1000 - playList[currentSong].position()/1000; // Needs Updating
+  String concatTimeRemaining = str ( timeRemaining ) + " | " + str ( playListMetaData[currentSong].length()/1000 ) + " Seconds";
+  text( concatTimeRemaining, stwX3, stwY3, stwWidth3, stwHeight3 ); //Note: str(timeRemaining)
+  //NOTE: Students to format Minutes and Seconds
+  //
+  //Repeating Code, different from Static
+  ink = ( randomColour == true ) ? color( random(0, 256), random(256), random(256) ) : bizzyblue ; //Ternary Operator
+  //
+  fill(ink);
+  size = 83; //Change the number until it fits
+  textFont( saiyanFont, size );
+  text( str ( playList[currentSong].position()/1000 ), stwX2, stwY2, stwWidth2, stwHeight2 );
+  //
+  /*
+  fill(resetDefaultInk);
+   //rect( metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1 );
+   //rect( metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2 );
+   rect( metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3 );
+   */
+}
 //
 void mousePressed() {
-} //End mousePressed
+  //Boolean for Click
+  //if() {} else {}
+  //
+  /* STOP Button Mouse Press, after Hoverover
+   Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
+   */
+  if ( mouseX>stwX1 && mouseX<stwX1+stwWidth1 && mouseY>stwY1 && mouseY<stwY1+stwHeight1 ) {
+    playList[currentSong].play(); // .loop(0) ... .play() matches keyPressed
+  }
+}
 //
 void keyPressed() {
- //
+   // Random Colour of .title()
+  if ( randomColour == true ) {
+    randomColour = false;
+  } else {
+    randomColour = true;
+  }
+  //
   /* Key Board Short Cuts ... learning what the Music Buttons could be
    Note: CAP Lock with ||
    if ( key==? || key==? ) ;
@@ -206,6 +296,6 @@ void keyPressed() {
    - need to have basic GUI complete first
    */
   //
-} //End keyPressed
+}
 //
-// End Main Program
+// end main
